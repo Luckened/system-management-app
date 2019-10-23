@@ -3,7 +3,7 @@ package classes;
 /**
  * Usuario
  */
-public abstract class Usuario {
+public abstract class User {
     String login;
     String password;
     String name;
@@ -13,7 +13,7 @@ public abstract class Usuario {
     String address;
     int tipo;
 
-    public Usuario(String login, String password, String name, int id, String phone, String email, String address) {
+    public User(String login, String password, String name, int id, String phone, String email, String address) {
         this.login = login;
         this.password = password;
         this.name = name;
@@ -23,5 +23,5 @@ public abstract class Usuario {
         this.address = address;
     }
 
-    public  CadastrarUsuario()
+    public abstract boolean registerUser(int type, User user);
 }
