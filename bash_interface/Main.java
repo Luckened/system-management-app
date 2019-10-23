@@ -8,26 +8,29 @@ import java.util.*;
 public class Main {
   public static void main(String[] args) {
     Scanner read = new Scanner(System.in);
-    System.out.println("Bem-vindo!! O que deseja fazer?");
-    // System.out.println("1 - Login");
-    System.out.println("1 - Cadastrar");
-    System.out.println("2 - Editar");
-    System.out.println("3 - Sair");
-    int resp = read.nextInt();
-
-    while (resp != 3) {
-
+    System.out.println("Bem-vindo!! O que deseja fazer?\n");
+    System.out.println("1 - Logar\t 2 - Cadastrar\t 3 - Editar\t 4 - Sair");
+    String text = read.next();
+    int resp = Integer.parseInt(text);
+    while (resp != 4) {
       switch (resp) {
       case 1:
-
+        System.out.println("Logou");
         break;
       case 2:
+        System.out.println("Cadastrou");
         break;
+      case 3:
+        System.out.println("Editou");
       default:
-
+        System.out.println("\nValor inválido! Digite outra opção:\n");
+        System.out.println("1 - Logar\t 2 - Cadastrar\t 3 - Editar\t 4 - Sair");
+        resp = read.nextInt();
+        continue;
       }
-
-      System.out.println("Algo mais?");
+      System.out.println("\nO que mais?\n");
+      System.out.println("1 - Cadastrar\t 2 - Editar\t 3 - Sair");
+      resp = Integer.parseInt(read.next());
     }
   }
 }
