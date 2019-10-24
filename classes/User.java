@@ -7,10 +7,10 @@ public abstract class User {
     String login;
     String password;
     String name;
-    int id;
     String phone;
     String email;
     String address;
+    int id;
     int tipo;
 
     public User(String login, String password, String name, int id, String phone, String email, String address) {
