@@ -29,7 +29,7 @@ public class Main {
         continue;
       }
       System.out.println("\nO que mais?\n");
-      System.out.println("1 - Cadastrar\t 2 - Editar\t 3 - Sair");
+      System.out.println("1 - Logar\t 2 - Cadastrar\t 3 - Editar\t 4 - Sair");
       resp = Integer.parseInt(read.next());
     }
   }
