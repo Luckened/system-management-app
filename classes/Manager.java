@@ -1,20 +1,26 @@
 package classes;
 
+import java.util.*;
+
 public class Manager extends User {
-    public Manager(String login, String password, String name, int id, String phone, String email, String address) {
-        super(login, password, name, id, phone, email, address);
+    public Manager(int id, String login, String password, String name, String phone, String email, String address) {
+        super(id, login, password, name, phone, email, address);
     }
 
-    public boolean registerUser(int type, User user) {
+    protected String getPassword() {
+        return this.password;
+    }
+
+    public boolean registerUser(HashMap<String, User> data, int type, User user) {
         if (user != null)
-            switch (tipo) {
+            switch (type) {
             case 1:
                 Client newClient = (Client) user;
-                // systemio.insertUser(newClient)
+                // data.put(newClient.getLogin(), newClient);
                 return true;
             case 2:
                 Worker newWorker = (Worker) user;
-                // systemio.insertUser(newWorker)
+                // data.put(newWorker.getLogin(), )
                 return true;
             case 3:
                 Manager newManager = (Manager) user;
@@ -29,4 +35,11 @@ public class Manager extends User {
     public boolean removeUser(int type) {
         return true;
     }
+
+    public boolean authenticate(String password) {
+        if (this.getPassword().equals(password))
+            return true;
+        return false;
+    }
+
 }

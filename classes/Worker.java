@@ -1,13 +1,19 @@
 package classes;
 
+import java.util.*;
+
 public class Worker extends User {
-    public Worker(String login, String password, String name, int id, String phone, String email, String address) {
-        super(login, password, name, id, phone, email, address);
+    public Worker(int type, String login, String password, String name, String phone, String email, String address) {
+        super(type, login, password, name, phone, email, address);
     }
 
-    public boolean registerUser(int type, User user) {
+    protected String getPassword() {
+        return this.password;
+    }
+
+    public boolean registerUser(HashMap<String, User> data, int type, User user) {
         if (user != null)
-            switch (tipo) {
+            switch (type) {
             case 1:
                 Client newClient = (Client) user;
                 // systemio.insertUser(newClient)
@@ -19,6 +25,12 @@ public class Worker extends User {
             default:
                 return false;
             }
+        return false;
+    }
+
+    public boolean authenticate(String password) {
+        if (this.getPassword().equals(password))
+            return true;
         return false;
     }
 }
