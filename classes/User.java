@@ -7,7 +7,7 @@ import java.util.*;
  */
 public abstract class User {
     protected int type;
-    protected String login;
+    public String login;
     protected String password;
     protected String name;
     protected String phone;
@@ -29,5 +29,15 @@ public abstract class User {
     public abstract boolean authenticate(String password);
 
     public abstract boolean registerUser(HashMap<String, User> data, int type, User user);
+
+    public abstract void setPassword(String password);
+
+    public abstract void setName(String name);
+
+    public abstract void setPhone(String phone);
+
+    public abstract void setEmail(String email);
+
+    public abstract void setAddress(String address);
 
 }

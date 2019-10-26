@@ -12,15 +12,7 @@ public class Client extends User {
 	}
 
 	public boolean registerUser(HashMap<String, User> data, int type, User user) {
-		if (user != null)
-			switch (type) {
-			case 1:
-				Client newClient = (Client) user;
-				// systemio.insertUser(newClient)
-				return true;
-			default:
-				return false;
-			}
+		// to implement
 		return false;
 	}
 
@@ -28,6 +20,26 @@ public class Client extends User {
 		if (this.getPassword().equals(password))
 			return true;
 		return false;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 }

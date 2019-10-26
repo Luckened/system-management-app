@@ -12,19 +12,7 @@ public class Worker extends User {
     }
 
     public boolean registerUser(HashMap<String, User> data, int type, User user) {
-        if (user != null)
-            switch (type) {
-            case 1:
-                Client newClient = (Client) user;
-                // systemio.insertUser(newClient)
-                return true;
-            case 2:
-                Worker newWorker = (Worker) user;
-                // systemio.insertUser(newWorker)
-                return true;
-            default:
-                return false;
-            }
+        // to implement
         return false;
     }
 
@@ -33,4 +21,25 @@ public class Worker extends User {
             return true;
         return false;
     }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
 }
