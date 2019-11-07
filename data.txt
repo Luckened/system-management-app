@@ -1,0 +1,7 @@
+3,patty,ronald,patricia,31311331,patty@gmail.com,rua guaicui 350
+1,luckened,lukita,lucca miranda,00000000,luccafmsilva@gmail.com,sei nao bixo
+2,joaothelmo,2882,joao thelmo,87654321,joao@cueio.com,rua guaicui 350
+1,sdfsfs,dfsdfsdf,sdfsd,fsdfsd,fsdfsdf,sfsdfs
+1,savinho,luccafofo,savio,12121212,savio@skate.com,atras do cefet
+1,fifi,pelobranquinho,fifis,01010101,fifi@gmail.com,sala de estar
+2,malu,pao,maluzinha,313131,malu@gmail.com,lalaalalla alala
