@@ -5,10 +5,12 @@ import java.util.*;
 
 public class SysIO {
     private HashMap<String, User> data;
+    private String filePath;
 
     public SysIO(String filePath) throws Exception {
-        BufferedReader in = null;
+        this.filePath = filePath;
         data = new HashMap<>();
+        BufferedReader in = null;
         // load .txt to system
         String line;
         try {
@@ -41,10 +43,10 @@ public class SysIO {
     }
 
     // save hashmap to .txt file
-    public void save(HashMap<String, User> data, String filePath) throws IOException {
+    public void save(HashMap<String, User> data) throws IOException {
         BufferedWriter out = null;
         try {
-            out = new BufferedWriter(new FileWriter(filePath));
+            out = new BufferedWriter(new FileWriter(this.filePath));
             for (Map.Entry<String, User> entry : data.entrySet()) {
                 out.write(entry.getValue().type + "," + entry.getValue().login + "," + entry.getValue().password + ","
                         + entry.getValue().name + "," + entry.getValue().phone + "," + entry.getValue().email + ","

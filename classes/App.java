@@ -1,5 +1,6 @@
 package classes;
 
+import java.io.IOException;
 import java.util.*;
 
 public class App {
@@ -8,8 +9,6 @@ public class App {
     User loggedUser;
     SysIO sysio;
     HashMap<String, User> data;
-    String tempUsername;
-    User tempUser;
 
     public App() throws Exception {
         System.out.println("Iniciando sistema...");
@@ -20,7 +19,7 @@ public class App {
         data = sysio.getData(); // obtem os dados cadastrados
     }
 
-    public void start() {
+    public void start() throws IOException {
         System.out.println("Bem vindo!\nO que deseja fazer?");
         int ans;
         do {
@@ -33,6 +32,11 @@ public class App {
             if (ans == 4)
                 System.out.println("\n\nSaindo!\n\n");
         } while (ans != 4);
+        try {
+            sysio.save(data);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void func(int ans) {
@@ -43,8 +47,7 @@ public class App {
             String username = read.next();
             System.out.println("Digite a senha: ");
             String password = read.next();
-            boolean logou = login(username, password);
-            if (logou) {
+            if (login(username, password)) {
                 loggedIn = true;
                 System.out.println("Logado com sucesso.");
             } else {
@@ -52,8 +55,8 @@ public class App {
                     loggedIn = false;
                 System.out.println("Usuário ou senha incorretos.");
             }
-            System.out.println(loggedIn);
-            System.out.println(loggedUser);
+            System.out.println("loggedin = " + loggedIn);
+            System.out.println("loggeduser = " + loggedUser);
             break;
         case 2:
             // cadastro de novo usuario
@@ -71,9 +74,13 @@ public class App {
                 }
 
             System.out.println("Digite o usuário:");
-            tempUsername = read.nextLine();
+            String tempUsername = read.nextLine();
+            if (data.containsKey(tempUsername)) {
+                System.out.println("Usuário já existente");
+                break;
+            }
             System.out.println("Digite a senha:");
-            String tempPassw = read.nextLine();
+            String tempPassword = read.nextLine();
             System.out.println("Digite o nome:");
             String tempName = read.nextLine();
             System.out.println("Digite o telefone:");
@@ -83,29 +90,22 @@ public class App {
             read.nextLine();
             System.out.println("Digite o endereço:");
             String tempAddr = read.nextLine();
-            tempUser = null;
+            User tempUser = null;
 
-            if (!loggedIn) {
-                if (op == 2)
-                    tempUser = new Client(op, tempUsername, tempPassw, tempName, tempPhone, tempEmail, tempAddr);
-                else if (op == 3)
-                    tempUser = new Worker(op, tempUsername, tempPassw, tempName, tempPhone, tempEmail, tempAddr);
-                data.put(tempUsername, tempUser);
+            switch (op) {
+            case 1:
+                tempUser = new Manager(op, tempUsername, tempPassword, tempName, tempPhone, tempEmail, tempAddr);
                 break;
-            } else {
-                switch (op) {
-                case 1:
-                    tempUser = new Manager(op, tempUsername, tempPassw, tempName, tempPhone, tempEmail, tempAddr);
-                    break;
-                case 2:
-                    tempUser = new Client(op, tempUsername, tempPassw, tempName, tempPhone, tempEmail, tempAddr);
-                    break;
-                case 3:
-                    tempUser = new Worker(op, tempUsername, tempPassw, tempName, tempPhone, tempEmail, tempAddr);
-                    break;
-                }
-                data.put(tempUsername, tempUser);
+            case 2:
+                tempUser = new Client(op, tempUsername, tempPassword, tempName, tempPhone, tempEmail, tempAddr);
+                break;
+            case 3:
+                tempUser = new Worker(op, tempUsername, tempPassword, tempName, tempPhone, tempEmail, tempAddr);
+                break;
             }
+            System.out.println(tempUser.login + tempUser.password + tempUser.phone);
+
+            data.put(tempUsername, tempUser);
             System.out.println("Cadastrou");
             break;
         case 3:
@@ -165,10 +165,8 @@ public class App {
 
     private boolean login(String username, String password) {
         User user = data.get(username);
-        if (user == null) {
-            System.out.println("Usuário inexistente!");
+        if (user == null)
             return false;
-        }
         if (user.authenticate(password)) {
             loggedUser = user;
             return true;
