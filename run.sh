@@ -4,4 +4,3 @@ clear
 java bash_interface.Main
 rm bash_interface/*.class
 rm classes/*.class
-
