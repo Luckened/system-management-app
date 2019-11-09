@@ -31,7 +31,6 @@ public class SysIO {
                     break;
                 }
 
-                // debugar null pointer da linha abaixo
                 this.data.put(parts[1], temp);
             }
         } catch (Exception e) {
