@@ -9,7 +9,8 @@ public class App {
     User loggedUser;
     SysIO sysio;
     HashMap<String, User> data;
-    HashMap<String, Service> services;
+    ArrayList<Service> services;
+    HashMap<String, Request> requests;
     int ans;
 
     public App() throws Exception {
@@ -20,7 +21,7 @@ public class App {
         sysio = new SysIO("data.txt");
         data = sysio.getData(); // obtem os dados cadastrados
         ans = 0;
-        services = new HashMap<String, Service>();
+        services = new ArrayList<Service>();
     }
 
     public void start() throws IOException {
@@ -72,6 +73,7 @@ public class App {
                 break;
             case 4:
                 // criar orçamento
+                this.makeRequest((Client) loggedUser);
                 break;
             case 5:
                 ans = 200;
@@ -128,6 +130,7 @@ public class App {
                 this.editUser();
                 break;
             case 4:
+                // cadastrar um pedido
                 this.registerService();
                 break;
             case 5:
@@ -254,17 +257,17 @@ public class App {
     private void registerService() {
         System.out.println("Digite o nome do serviço:");
         String tempServiceType = read.nextLine();
-        if (services.containsKey(tempServiceType)) {
-            System.out.println("Serviço já existente");
-            return;
-        }
+
         System.out.println("Digite a descrição:");
         String tempDescription = read.nextLine();
 
         Service tempService = null;
         tempService = new Service(tempServiceType, tempDescription, 0, false);
-
-        services.put(tempServiceType, tempService);
+        if (services.contains(tempService)) {
+            System.out.println("Serviço já existente");
+            return;
+        }
+        services.add(tempService);
         System.out.println("Cadastrou");
     }
 
@@ -327,5 +330,23 @@ public class App {
 
         data.put(tempUsername, tempUser);
         System.out.println("Cadastrou");
+    }
+
+    private void makeRequest(Client client) {
+        System.out.println("Escolha entre os tipos de serviço:");
+        int op = 0;
+        int i = 0;
+        for (Service service : services) {
+            i++;
+            System.out.println(i + " - " + service.getType());
+
+        }
+        op = Integer.parseInt(read.next());
+        read.nextLine();
+
+        Service serviceChosen = services.get(i - 1);
+
+        System.out.println("Escolha um dos prestadores desse serviço:");
+        System.out.println("Ainda n tem fon");
     }
 }
