@@ -20,6 +20,7 @@ public class App {
         sysio = new SysIO("data.txt");
         data = sysio.getData(); // obtem os dados cadastrados
         ans = 0;
+        services = new HashMap<String, Service>();
     }
 
     public void start() throws IOException {
@@ -39,7 +40,7 @@ public class App {
                 if (ans == 200)
                     System.out.println("\n\nSaindo!\n\n");
             } catch (Exception e) {
-                // /e.printStackTrace();
+                e.printStackTrace();
                 System.out.println("Houve algum erro! Tente novamente por favor:");
             }
         } while (ans != 200);
@@ -110,7 +111,7 @@ public class App {
         }
         if (loggedUser instanceof Manager) {
             System.out.println(
-                    "\n1 - Deslogar\t 2 - Cadastrar\t 3 - Editar\t 4 - Cadastrar Serviço\t 5 - Validar serviços\t 6 - Listar pedidos\n");
+                    "\n1 - Deslogar\t 2 - Cadastrar\t 3 - Editar\t 4 - Cadastrar Serviço\t 5 - Validar serviços\t 6 - Listar pedidos\t 7 - Sair do Sistema\n");
             ans = Integer.parseInt(read.next());
             read.nextLine();
             switch (ans) {
@@ -135,6 +136,10 @@ public class App {
             case 6:
                 // listar pedidos
                 break;
+            case 7:
+                // listar pedidos
+                ans = 200;
+                return;
             }
         }
     }
