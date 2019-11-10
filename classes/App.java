@@ -20,6 +20,7 @@ public class App {
         loggedUser = null;
         sysio = new SysIO("data.txt");
         data = sysio.getData(); // obtem os dados cadastrados
+
         ans = 0;
         services = new ArrayList<Service>();
     }
@@ -314,7 +315,7 @@ public class App {
         System.out.println("Digite o endereço:");
         String tempAddr = read.nextLine();
         User tempUser = null;
-
+        System.out.println("Chosen: " + op);
         switch (op) {
         case 1:
             tempUser = new Manager(op, tempUsername, tempPassword, tempName, tempPhone, tempEmail, tempAddr);
@@ -344,7 +345,7 @@ public class App {
         op = Integer.parseInt(read.next());
         read.nextLine();
 
-        Service serviceChosen = services.get(i - 1);
+        Service serviceChosen = services.get(op - 1);
 
         System.out.println("Escolha um dos prestadores desse serviço:");
         System.out.println("Ainda n tem fon");
