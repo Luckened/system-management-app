@@ -1,22 +1,17 @@
 package classes;
 
 public class Service {
-    private String name;
     private String type;
     private String description;
     private double value;
     private boolean valid;
 
-    public Service(String name, String description, double value, boolean valid) {
-        this.name = name;
+    public Service(String type, String description, double value, boolean valid) {
+
         this.type = type;
         this.description = description;
         this.value = value;
         this.valid = valid;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public void setType(String type) {
@@ -29,10 +24,6 @@ public class Service {
 
     public void setValidated(boolean validated) {
         this.valid = validated;
-    }
-
-    public String getName() {
-        return this.name;
     }
 
     public String getType() {
