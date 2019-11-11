@@ -141,7 +141,6 @@ public class App {
                 // listar pedidos
                 break;
             case 7:
-                // listar pedidos
                 ans = 200;
                 return;
             }
@@ -263,7 +262,7 @@ public class App {
         String tempDescription = read.nextLine();
 
         Service tempService = null;
-        tempService = new Service(tempServiceType, tempDescription, 0, false);
+        tempService = new Service(tempServiceType, tempDescription, 0, false, false, null);
         if (services.contains(tempService)) {
             System.out.println("Serviço já existente");
             return;
@@ -348,6 +347,6 @@ public class App {
         Service serviceChosen = services.get(op - 1);
 
         System.out.println("Escolha um dos prestadores desse serviço:");
-        System.out.println("Ainda n tem fon");
+        // for(Worker worker : serviceChosen.)
     }
 }

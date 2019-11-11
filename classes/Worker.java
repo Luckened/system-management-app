@@ -3,6 +3,8 @@ package classes;
 import java.util.*;
 
 public class Worker extends User {
+    private ArrayList<Request> requests;
+
     public Worker(int type, String login, String password, String name, String phone, String email, String address) {
         super(type, login, password, name, phone, email, address);
     }

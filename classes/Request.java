@@ -4,13 +4,13 @@ import java.util.*;
 
 public class Request {
   Client client;
-  ArrayList<Service> services;
-  double totalValue;
+  Service service;
+  double value;
 
-  public Request(Client client, ArrayList<Service> services, double totalValue) {
+  public Request(Client client, Service service, double value) {
     this.client = client;
-    this.services = services;
-    this.totalValue = totalValue;
+    this.service = service;
+    this.value = value;
   }
 
   public void setClient(Client client) {
@@ -21,19 +21,19 @@ public class Request {
     return client;
   }
 
-  public void setServices(ArrayList<Service> services) {
-    this.services = services;
+  public void setService(Service service) {
+    this.service = service;
   }
 
-  public ArrayList<Service> getServices() {
-    return services;
+  public Service getService() {
+    return service;
   }
 
-  public void setTotalValue(double totalValue) {
-    this.totalValue = totalValue;
+  public void setValue(double totalValue) {
+    this.value = totalValue;
   }
 
-  public double getTotalValue() {
-    return totalValue;
+  public double getValue() {
+    return value;
   }
 }
