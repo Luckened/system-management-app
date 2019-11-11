@@ -25,12 +25,12 @@ public class SysIO {
                     break;
                 case 2: // worker
                     temp = new Client(Integer.parseInt(parts[0]), parts[1], parts[2], parts[3], parts[4], parts[5],
-                            parts[6]);
+                            parts[6], null);
 
                     break;
                 case 3: // client
                     temp = new Worker(Integer.parseInt(parts[0]), parts[1], parts[2], parts[3], parts[4], parts[5],
-                            parts[6]);
+                            parts[6], null, null);
                     break;
                 }
 

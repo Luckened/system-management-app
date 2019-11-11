@@ -3,8 +3,12 @@ package classes;
 import java.util.*;
 
 public class Client extends User {
-	public Client(int type, String login, String password, String name, String phone, String email, String address) {
+	private ArrayList<Request> requests;
+
+	public Client(int type, String login, String password, String name, String phone, String email, String address,
+			ArrayList<Request> requests) {
 		super(type, login, password, name, phone, email, address);
+		this.requests = requests;
 	}
 
 	protected String getPassword() {
@@ -26,6 +30,10 @@ public class Client extends User {
 		this.password = password;
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -40,6 +48,14 @@ public class Client extends User {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public void setRequests(ArrayList<Request> requests) {
+		this.requests = requests;
+	}
+
+	public ArrayList<Request> getRequests() {
+		return requests;
 	}
 
 }

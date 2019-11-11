@@ -4,13 +4,15 @@ import java.util.*;
 
 public class Request {
   Client client;
-  Service service;
-  double value;
+  Evaluation evaluation;
+  Worker worker;
+  boolean done;
 
-  public Request(Client client, Service service, double value) {
+  public Request(Client client, Evaluation evaluation, Worker worker, boolean done) {
     this.client = client;
-    this.service = service;
-    this.value = value;
+    this.evaluation = evaluation;
+    this.worker = worker;
+    this.done = done;
   }
 
   public void setClient(Client client) {
@@ -21,19 +23,11 @@ public class Request {
     return client;
   }
 
-  public void setService(Service service) {
-    this.service = service;
+  public boolean getDone() {
+    return done;
   }
 
-  public Service getService() {
-    return service;
-  }
-
-  public void setValue(double totalValue) {
-    this.value = totalValue;
-  }
-
-  public double getValue() {
-    return value;
+  public void setDone(boolean done) {
+    this.done = done;
   }
 }

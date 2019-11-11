@@ -8,3 +8,4 @@
 2,teste1,teste1,teste1,teste1,teste1,teste1
 2,client,client,a,a,a,a
 2,testecliente,testecliente,cliente,clienter,cliente,cliente
+3,profissional,profissional,a,a,a,a

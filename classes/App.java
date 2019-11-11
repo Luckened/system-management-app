@@ -10,7 +10,7 @@ public class App {
     SysIO sysio;
     HashMap<String, User> data;
     ArrayList<Service> services;
-    HashMap<String, Request> requests;
+    ArrayList<Request> requests;
     int ans;
 
     public App() throws Exception {
@@ -23,6 +23,7 @@ public class App {
 
         ans = 0;
         services = new ArrayList<Service>();
+        requests = new ArrayList<Request>();
     }
 
     public void start() throws IOException {
@@ -102,9 +103,11 @@ public class App {
                 break;
             case 4:
                 // adicionar serviço que ele pode realizar
+                this.registerEvaluation();
                 break;
             case 5:
                 // listar pedidos
+                this.listRequests((Worker) loggedUser);
                 break;
             case 6:
                 ans = 200;
@@ -320,10 +323,10 @@ public class App {
             tempUser = new Manager(op, tempUsername, tempPassword, tempName, tempPhone, tempEmail, tempAddr);
             break;
         case 2:
-            tempUser = new Client(op, tempUsername, tempPassword, tempName, tempPhone, tempEmail, tempAddr);
+            tempUser = new Client(op, tempUsername, tempPassword, tempName, tempPhone, tempEmail, tempAddr, null);
             break;
         case 3:
-            tempUser = new Worker(op, tempUsername, tempPassword, tempName, tempPhone, tempEmail, tempAddr);
+            tempUser = new Worker(op, tempUsername, tempPassword, tempName, tempPhone, tempEmail, tempAddr, null, null);
             break;
         }
         System.out.println(tempUser.login + tempUser.password + tempUser.phone);
@@ -339,7 +342,6 @@ public class App {
         for (Service service : services) {
             i++;
             System.out.println(i + " - " + service.getType());
-
         }
         op = Integer.parseInt(read.next());
         read.nextLine();
@@ -347,6 +349,66 @@ public class App {
         Service serviceChosen = services.get(op - 1);
 
         System.out.println("Escolha um dos prestadores desse serviço:");
-        // for(Worker worker : serviceChosen.)
+        i = 0;
+        for (Worker worker : serviceChosen.getWorkers()) {
+            i++;
+            System.out.println(i + " - " + worker.getName() + " - Valor cobrado: "
+                    + worker.getEvaluationByService(serviceChosen).getValue());
+        }
+        op = Integer.parseInt(read.next());
+        read.nextLine();
+        Worker tempWorker = serviceChosen.getWorkers().get(i - 1);
+        Evaluation tempEvaluation = tempWorker.getEvaluationByService(serviceChosen);
+        Request tempRequest = new Request((Client) loggedUser, tempEvaluation, tempWorker, false);
+        ArrayList<Request> aux;
+
+        requests.add(tempRequest);
+        aux = ((Client) loggedUser).getRequests();
+        aux.add(tempRequest);
+        ((Client) loggedUser).setRequests(aux);
     }
+
+    private void registerEvaluation() {
+        System.out.println("Qual dos serviços cadastrar?");
+        int i = 0;
+        int op;
+        for (Service service : services) {
+            i++;
+            System.out.println(i + " - " + service.getType());
+        }
+        op = Integer.parseInt(read.next());
+        read.nextLine();
+
+        Service tempService = services.get(op - 1);
+
+        System.out.println("Qual o valor a ser cobrado para esse serviço?");
+        double tempValue = Double.parseDouble(read.next());
+        read.nextLine();
+
+        Evaluation tempEvaluation = new Evaluation(tempService, tempValue);
+
+        ArrayList<Evaluation> aux = ((Worker) loggedUser).getEvaluations();
+        aux.add(tempEvaluation);
+        ((Worker) loggedUser).setEvaluations(aux);
+
+    }
+
+    private void listRequests(Worker worker) {
+        ArrayList<Request> requestsByWorker = new ArrayList<Request>();
+        for (Request request : requests) {
+            if (worker.equals(request.worker)) {
+                requestsByWorker.add(request);
+            }
+        }
+        if (requestsByWorker.isEmpty()) {
+            System.out.println("Não há nenhum pedido para este usuário");
+            return;
+        }
+        int i = 0;
+        for (Request request : requestsByWorker) {
+            i++;
+            System.out.println();
+        }
+    }
+
 }

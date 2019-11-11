@@ -3,10 +3,12 @@ package classes;
 import java.util.*;
 
 public class Worker extends User {
-    private ArrayList<Request> requests;
+    private ArrayList<Evaluation> evaluations;
 
-    public Worker(int type, String login, String password, String name, String phone, String email, String address) {
+    public Worker(int type, String login, String password, String name, String phone, String email, String address,
+            ArrayList<Request> requests, ArrayList<Evaluation> evaluations) {
         super(type, login, password, name, phone, email, address);
+        this.evaluations = evaluations;
     }
 
     protected String getPassword() {
@@ -32,6 +34,10 @@ public class Worker extends User {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setPhone(String phone) {
         this.phone = phone;
     }
@@ -42,6 +48,24 @@ public class Worker extends User {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public ArrayList<Evaluation> getEvaluations() {
+        return evaluations;
+    }
+
+    public void setEvaluations(ArrayList<Evaluation> evaluations) {
+        this.evaluations = evaluations;
+    }
+
+    public Evaluation getEvaluationByService(Service service) {
+        for (Evaluation evaluation : evaluations) {
+            if (service.equals(evaluation.getService())) {
+                return evaluation;
+            }
+        }
+
+        return null;
     }
 
 }
