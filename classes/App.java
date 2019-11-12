@@ -349,7 +349,6 @@ public class App {
         read.nextLine();
 
         Service serviceChosen = services.get(op - 1);
-        System.out.println(serviceChosen.getType());
 
         System.out.println("Escolha um dos prestadores desse serviço:");
         i = 0;
@@ -369,6 +368,9 @@ public class App {
         aux = ((Client) loggedUser).getRequests();
         aux.add(tempRequest);
         ((Client) loggedUser).setRequests(aux);
+
+        System.out.println(((Client) loggedUser).getName() + " solicitou um(a) " + serviceChosen.getType() + " com "
+                + tempWorker.getName());
     }
 
     private void registerEvaluation() {
@@ -397,6 +399,9 @@ public class App {
         ArrayList<Worker> aux2 = tempService.getWorkers();
         aux2.add((Worker) loggedUser);
         tempService.setWorkers(aux2);
+
+        System.out.println(((Worker) loggedUser).getName() + " definiu que realizará " + tempService.getType()
+                + " por R$" + tempValue);
 
     }
 
