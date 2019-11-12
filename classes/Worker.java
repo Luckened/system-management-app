@@ -6,7 +6,7 @@ public class Worker extends User {
     private ArrayList<Evaluation> evaluations;
 
     public Worker(int type, String login, String password, String name, String phone, String email, String address,
-            ArrayList<Request> requests, ArrayList<Evaluation> evaluations) {
+            ArrayList<Evaluation> evaluations) {
         super(type, login, password, name, phone, email, address);
         this.evaluations = evaluations;
     }

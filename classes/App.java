@@ -265,7 +265,7 @@ public class App {
         String tempDescription = read.nextLine();
 
         Service tempService = null;
-        tempService = new Service(tempServiceType, tempDescription, 0, false, false, null);
+        tempService = new Service(tempServiceType, tempDescription, 0, false, false, new ArrayList<>());
         if (services.contains(tempService)) {
             System.out.println("Serviço já existente");
             return;
@@ -323,10 +323,12 @@ public class App {
             tempUser = new Manager(op, tempUsername, tempPassword, tempName, tempPhone, tempEmail, tempAddr);
             break;
         case 2:
-            tempUser = new Client(op, tempUsername, tempPassword, tempName, tempPhone, tempEmail, tempAddr, null);
+            tempUser = new Client(op, tempUsername, tempPassword, tempName, tempPhone, tempEmail, tempAddr,
+                    new ArrayList<>());
             break;
         case 3:
-            tempUser = new Worker(op, tempUsername, tempPassword, tempName, tempPhone, tempEmail, tempAddr, null, null);
+            tempUser = new Worker(op, tempUsername, tempPassword, tempName, tempPhone, tempEmail, tempAddr,
+                    new ArrayList<>());
             break;
         }
         System.out.println(tempUser.login + tempUser.password + tempUser.phone);
@@ -347,6 +349,7 @@ public class App {
         read.nextLine();
 
         Service serviceChosen = services.get(op - 1);
+        System.out.println(serviceChosen.getType());
 
         System.out.println("Escolha um dos prestadores desse serviço:");
         i = 0;
@@ -357,7 +360,7 @@ public class App {
         }
         op = Integer.parseInt(read.next());
         read.nextLine();
-        Worker tempWorker = serviceChosen.getWorkers().get(i - 1);
+        Worker tempWorker = serviceChosen.getWorkers().get(op - 1);
         Evaluation tempEvaluation = tempWorker.getEvaluationByService(serviceChosen);
         Request tempRequest = new Request((Client) loggedUser, tempEvaluation, tempWorker, false);
         ArrayList<Request> aux;
@@ -390,6 +393,10 @@ public class App {
         ArrayList<Evaluation> aux = ((Worker) loggedUser).getEvaluations();
         aux.add(tempEvaluation);
         ((Worker) loggedUser).setEvaluations(aux);
+
+        ArrayList<Worker> aux2 = tempService.getWorkers();
+        aux2.add((Worker) loggedUser);
+        tempService.setWorkers(aux2);
 
     }
 
